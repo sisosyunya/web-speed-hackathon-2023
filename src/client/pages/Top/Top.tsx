@@ -28,6 +28,7 @@ export const Top: FC = () => {
 
           <div className={styles.featureList()}>
             {features.map((featureSection) => {
+              console.log(featureSection);
               return (
                 <div key={featureSection.id} className={styles.feature()}>
                   <h2 className={styles.featureHeading()}>{featureSection.title}</h2>

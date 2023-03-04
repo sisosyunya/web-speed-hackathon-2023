@@ -10,7 +10,7 @@ import { ProductListSlider } from '../ProductListSlider';
 type Props = {
   featureSection: FeatureSectionFragmentResponse;
 };
-
+// デスクトップとモバイルで表示を切り替える
 export const ProductList: FC<Props> = memo(({ featureSection }) => {
   return (
     <GetDeviceType>

@@ -1,6 +1,6 @@
-# fly.toml file generated for red-night-7527 on 2023-03-04T11:59:29+09:00
+# fly.toml file generated for cold-haze-1467 on 2023-03-04T13:10:37+09:00
 
-app = "red-night-7527"
+app = "cold-haze-1467"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
