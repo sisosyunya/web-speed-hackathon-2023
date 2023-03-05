@@ -7,7 +7,7 @@ export const useFeatures = () => {
   const featuresResult = useSuspenseQuery<GetFeatureSectionsQueryResponse>(GetFeatureSectionsQuery);
 
   const features = featuresResult.data?.features;
-  console.log('features', features);
+  // console.log('features', features);
 
   return { features };
 };
