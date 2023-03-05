@@ -12,7 +12,7 @@ import { WidthRestriction } from '../../components/foundation/WidthRestriction';
 import { ProductHeroImage } from '../../components/product/ProductHeroImage';
 import { useAuthUser } from '../../hooks/useAuthUser';
 import { useRecommendation } from '../../hooks/useRecommendation';
-import { loadFonts } from '../../utils/load_fonts';
+// import { loadFonts } from '../../utils/load_fonts';
 
 import * as styles from './OrderComplete.styles';
 
@@ -23,9 +23,7 @@ export const OrderComplete: FC = () => {
   const { recommendation } = useRecommendation();
 
   useEffect(() => {
-    loadFonts().then(() => {
       setIsReadyFont(true);
-    });
   }, []);
 
   if (!recommendation || !isReadyFont || authUserLoading) {

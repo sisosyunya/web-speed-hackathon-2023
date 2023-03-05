@@ -348,7 +348,7 @@ async function seedOrders({ products, users }: { users: User[]; products: Produc
 }
 
 async function seed(): Promise<void> {
-  console.log('Initializing database...');
+  // console.log('Initializing database...');
   dataSource.setOptions({ database: DATABASE_SEED_PATH });
   dataSource.driver.database = DATABASE_SEED_PATH;
 
@@ -360,17 +360,17 @@ async function seed(): Promise<void> {
   // await dataSource.initialize();
   // await dataSource.synchronize(true);
 // 変更
-  console.log('Seeding media...');
+  // console.log('Seeding media...');
   const mediaList = await seedMediaFiles();
 // 変更
   const [users, products] = await Promise.all([
     seedUsers({ mediaList }),
     seedProducts({ mediaList })
   ])
-  console.log('Seeding users...');
+  // console.log('Seeding users...');
   // const users = await seedUsers({ mediaList });
 
-  console.log('Seeding products...');
+  // console.log('Seeding products...');
   // const products = await seedProducts({ mediaList });
 
   // 変更
@@ -379,13 +379,13 @@ async function seed(): Promise<void> {
     seedReviews({ products, users }),
     seedOrders({ products, users })
   ])
-  console.log('Seeding feature sections...');
+  // console.log('Seeding feature sections...');
   // await seedFeatureSections({ products });
 
-  console.log('Seeding reviews...');
+  // console.log('Seeding reviews...');
   // await seedReviews({ products, users });
 
-  console.log('Seeding orders...');
+  // console.log('Seeding orders...');
   // await seedOrders({ products, users });
 }
 

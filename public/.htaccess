@@ -1,0 +1,10 @@
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE application/atom_xml
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/rss+xml
+  AddOutputFilterByType DEFLATE text/plain
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/xml
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>

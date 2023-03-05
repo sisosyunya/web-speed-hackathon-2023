@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 
 import { Layout } from '../../components/application/Layout';
-import { loadFonts } from '../../utils/load_fonts';
+// import { loadFonts } from '../../utils/load_fonts';
 
 import * as styles from './NotFound.styles';
 
@@ -12,7 +12,7 @@ export const NotFound: FC = () => {
 
   useEffect(() => {
     const load = async () => {
-      await loadFonts();
+      // await loadFonts();
       setIsReady(true);
     };
 

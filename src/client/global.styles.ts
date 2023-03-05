@@ -12,6 +12,7 @@ export const injectGlobalStyle = () => css`
 
   body {
     font-family: sans-serif;
+    font-display: swap;
   }
 
   button {
