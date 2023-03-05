@@ -175,9 +175,10 @@ async function seedUsers({ mediaList }: { mediaList: MediaFile[] }): Promise<Use
       index++;
     }
   }
-
-  await insert(users);
-  await insert(profiles);
+  await Promise.all([insert(users), insert(profiles)]);
+// 変更
+  // await insert(users);
+  // await insert(profiles);
 
   return users;
 }
@@ -252,10 +253,11 @@ async function seedProducts({ mediaList }: { mediaList: MediaFile[] }): Promise<
       }
     }
   }
-
-  await insert(products);
-  await insert(recommendations);
-  await insert(offers);
+  await Promise.all([insert(products), insert(recommendations), insert(offers)]);
+// 変更
+  // await insert(products);
+  // await insert(recommendations);
+  // await insert(offers);
 
   return products;
 }
@@ -280,8 +282,9 @@ async function seedFeatureSections({ products }: { products: Product[] }): Promi
 
     section.items = items;
 
-    await insert([section]);
-    await insert(items);
+    Promise.all([insert([section]), insert(items)]);
+    // await insert([section]);
+    // await insert(items);
   }
 }
 
@@ -338,8 +341,9 @@ async function seedOrders({ products, users }: { users: User[]; products: Produc
     order.address = '';
     order.isOrdered = false;
 
-    await insert([order]);
-    await insert(order.items);
+    Promise.all([insert([order]), insert(order.items)]);
+    // await insert([order]);
+    // await insert(order.items);
   }
 }
 
@@ -347,26 +351,42 @@ async function seed(): Promise<void> {
   console.log('Initializing database...');
   dataSource.setOptions({ database: DATABASE_SEED_PATH });
   dataSource.driver.database = DATABASE_SEED_PATH;
-  await dataSource.initialize();
-  await dataSource.synchronize(true);
 
+  // 変更
+  await Promise.all([
+    dataSource.initialize(),
+    dataSource.synchronize(true)
+  ])
+  // await dataSource.initialize();
+  // await dataSource.synchronize(true);
+// 変更
   console.log('Seeding media...');
   const mediaList = await seedMediaFiles();
-
+// 変更
+  const [users, products] = await Promise.all([
+    seedUsers({ mediaList }),
+    seedProducts({ mediaList })
+  ])
   console.log('Seeding users...');
-  const users = await seedUsers({ mediaList });
+  // const users = await seedUsers({ mediaList });
 
   console.log('Seeding products...');
-  const products = await seedProducts({ mediaList });
+  // const products = await seedProducts({ mediaList });
 
+  // 変更
+  Promise.all([
+    seedFeatureSections({ products }),
+    seedReviews({ products, users }),
+    seedOrders({ products, users })
+  ])
   console.log('Seeding feature sections...');
-  await seedFeatureSections({ products });
+  // await seedFeatureSections({ products });
 
   console.log('Seeding reviews...');
-  await seedReviews({ products, users });
+  // await seedReviews({ products, users });
 
   console.log('Seeding orders...');
-  await seedOrders({ products, users });
+  // await seedOrders({ products, users });
 }
 
 seed().catch((err) => {
